@@ -13,9 +13,6 @@ jobs:
     runs-on: ubuntu-latest      
     steps:
       - uses: actions/checkout@v3
-      - name: Prepare environment
-        run: |
-          go install
       - name: Run unit tests
         run: |
           go test ./...
