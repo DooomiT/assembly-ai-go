@@ -113,6 +113,14 @@ type PollSettings struct {
 	timeout   time.Duration
 }
 
+type TranscriptionStatus string
+
+const (
+	Err       TranscriptionStatus = "error"
+	Queued                        = "queued"
+	Completed                     = "completed"
+)
+
 // Polls the transcription job based on a id.
 // Optionally you can provide pollSettings to define the poll frequency and timeout
 // pollSettings.frequency defines the poll frequency and defaults to 5 seconds
@@ -138,14 +146,14 @@ func (client *AssemblyAImpl) PollTranscript(id string, pollSettings *PollSetting
 		if err != nil {
 			return "", err
 		}
-		if data.Status == "error" {
+		switch TranscriptionStatus(data.Status) {
+		case Err:
 			return "", errors.New(data.Error)
-		}
-		if data.Status == "completed" {
+		case Completed:
 			return data.Text, nil
-		}
-		if data.Status == "queued" {
+		case Queued:
 			time.Sleep(pollSettings.frequency)
+
 		}
 	}
 	return "", fmt.Errorf("timeout, transcription not finished in %s", pollSettings.timeout)
