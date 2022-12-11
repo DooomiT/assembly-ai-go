@@ -1,4 +1,4 @@
-module github.com/dooomit/assembly-ai-go
+module github.com/DooomiT/assembly-ai-go
 
 go 1.19
 

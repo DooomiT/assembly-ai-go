@@ -5,7 +5,7 @@ This is a Go client of the AsesemblyAi API.
 ## Installation
 
 ```bash
-go get github.com/assemblyai/assembly-ai-go
+go get github.com/DooomiT/assembly-ai-go
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ package main
 
 import (
     "fmt"
-    "github.com/assemblyai/assembly-ai-go"
+    "github.com/DooomiT/assembly-ai-go"
 
     func main() {
         client := assemblyai.New("https://api.AssemblyAI.com/v2", "my-api-key")
